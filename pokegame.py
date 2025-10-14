@@ -16,7 +16,7 @@ the user has specified all of this information, they may begin the game.
 playing = True
 player = {"name": None, "active": None}
 owned_pokemon = {}
-starter_pokemon = {"species": None, "moves": [], "nickname": None}
+starter_pokemon = {"species": None, "moves": [], "hp": 0.0}
 starter_nickname = None
 
 # Available pokemon
@@ -134,7 +134,8 @@ def pick_player_name():
 
 def pick_pokemon_nickname():
     """Let the user name their pokemon."""
-    starter_pokemon["nickname"] = input("\nGive your creature a name: ")
+    global starter_nickname
+    starter_nickname = input("\nGive your creature a name: ")
 
 
 def start_menu():
@@ -165,6 +166,7 @@ def pick_character():
         except IndexError:
             pass
         starter_pokemon["species"] = poke_choice
+        starter_pokemon["hp"] = pokedex[poke_choice]["hp"]
         print(f"You chose {poke_choice}")
 
 
@@ -193,19 +195,21 @@ def start_game():
     if not starter_pokemon["moves"]:
         print("Your pokemon is missing a move!")
         ready = False
-    if not starter_pokemon["nickname"]:
+    if not starter_nickname:
         print("Your pokemon is missing a name!")
         ready = False
     if ready:
-        owned_pokemon[starter_pokemon["nickname"]] = starter_pokemon
-        player["active"] = owned_pokemon[starter_pokemon["nickname"]]
+        owned_pokemon[starter_nickname] = starter_pokemon
+        player["active"] = owned_pokemon[starter_nickname]
+        print(owned_pokemon)
+        print(player)
         print(f'\nYour first pokemon is named ' \
-              f'{starter_pokemon["nickname"]}, and it is a '
-              f'{starter_pokemon["species"].title()}.')
+              f'{starter_nickname}, and it is a '
+              f'{owned_pokemon[starter_nickname]["species"].title()}.')
         print("Its moves are:")
         for move in starter_pokemon["moves"]:
             print(f" - {move.title()}")
-        print("The adventure begins... another time haha the game doesn't " \
+        print("\nThe adventure begins... another time haha the game doesn't " \
               "actually exist yet.")
         playing = False
 
