@@ -4,7 +4,7 @@
 # Class: CS 30
 # Coder: Atticus
 # Date: 10/06/2025
-# Version: 1.0
+# Version: 3.1
 ##############################################################################
 """A pokemon-style menu system for creating a pokemon.
 The user can choose their own name, the species of their pokemon, the name
@@ -86,7 +86,7 @@ def menu(text, actions, include_back=True):
     Returns:
         str: the user's choice
     """
-    ordered_actions = [action for action in actions]
+    ordered_actions = list(actions)  # Convert to list
     ordered_actions.extend([glob_act for glob_act in global_actions])
     ordered_actions.remove("Back") if not include_back else ordered_actions
     while True:
@@ -95,10 +95,9 @@ def menu(text, actions, include_back=True):
             print(f"[{index + 1}]  {action.capitalize()}")
         choice_num = force_input_dtype("Choice: ", "int")
         if 1 <= choice_num <= len(ordered_actions):
-            break
+            return ordered_actions[choice_num - 1]
         else:
             print("Not a valid option!")
-    return ordered_actions[choice_num - 1]
 
 
 def force_input_dtype(msg, dtype):
@@ -200,16 +199,16 @@ def start_game():
         ready = False
     if ready:
         owned_pokemon[starter_nickname] = starter_pokemon
-        player["active"] = owned_pokemon[starter_nickname]
+        player["active"] = starter_nickname
         print(owned_pokemon)
         print(player)
-        print(f'\nYour first pokemon is named ' \
-              f'{starter_nickname}, and it is a '
-              f'{owned_pokemon[starter_nickname]["species"].title()}.')
+        print("\n\n---------------------------------------------------------")
+        print(f'Your first pokemon is named {starter_nickname}, and it is '
+              f'a {owned_pokemon[starter_nickname]["species"].title()}.')
         print("Its moves are:")
         for move in starter_pokemon["moves"]:
             print(f" - {move.title()}")
-        print("\nThe adventure begins... another time haha the game doesn't " \
+        print("\nThe adventure begins... another time haha the game doesn't "
               "actually exist yet.")
         playing = False
 
