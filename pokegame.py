@@ -4,7 +4,7 @@
 # Class: CS 30
 # Coder: Atticus
 # Date: 10/06/2025
-# Version: 3.1
+# Version: 3.2
 ##############################################################################
 """A pokemon-style menu system for creating a pokemon.
 The user can choose their own name, the species of their pokemon, the name
