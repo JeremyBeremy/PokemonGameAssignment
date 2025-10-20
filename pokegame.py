@@ -114,11 +114,9 @@ def force_input_dtype(msg, dtype):
     while True:
         try:
             choice = input(msg)
-            choice = dtypes[dtype](choice)
-            break
+            return dtypes[dtype](choice)
         except ValueError:
             print(f"\nInvalid. Ensure your input is of type: {dtype}")
-    return choice
 
 
 def game_intro():
@@ -162,6 +160,8 @@ def pick_character():
         try:
             if owned_moves[0] not in pokedex[poke_choice]["moves"]:
                 starter_pokemon["moves"] = []
+                print("You move you had chosen is not compatible with "
+                      "the current pokemon. Please select another move.")
         except IndexError:
             pass
         starter_pokemon["species"] = poke_choice
