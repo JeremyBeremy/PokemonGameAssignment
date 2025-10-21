@@ -102,11 +102,9 @@ def menu(text, actions, include_back=True):
 
 def force_input_dtype(msg, dtype):
     """Force the user's input to match a chosen data type.
-
     Parameters:
         msg (str): text prompt for user
         dtype (str): desired data type for user input
-
     Returns:
         choice (int/float/str): user input as desired dtype
     """
@@ -160,7 +158,7 @@ def pick_character():
         try:
             if owned_moves[0] not in pokedex[poke_choice]["moves"]:
                 starter_pokemon["moves"] = []
-                print("You move you had chosen is not compatible with "
+                print("The move you had chosen is not compatible with "
                       "the current pokemon. Please select another move.")
         except IndexError:
             pass
